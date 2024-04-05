@@ -1,0 +1,82 @@
+/* Estilos para el cuerpo de la página */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url('https://dotcompatterns.wordpress.com/wp-content/uploads/2022/10/ryan-yao-hhbvtvxdv_i-unsplash.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Estilos para el encabezado */
+header {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 20px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Estilos para el contenido principal */
+main {
+  color: #fff;
+  padding: 20px;
+  text-align: left;
+}
+
+/* Estilos para el pie de página */
+footer {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Estilos para la sección de detalle */
+.detalle {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Estilos para las mitades */
+.mitad {
+  width: 40%; /* Ajusta el ancho según tus preferencias */
+  color: #fff;
+  padding: 10px;
+}
+
+/* Estilos para los botones */
+/* Estilos para los botones */
+button {
+  display: block;
+  margin-top: 10px;
+  background-color: transparent; /* Hacer el fondo transparente */
+  color: #fff; /* Color del texto blanco */
+  padding: 10px 20px; /* Ajustar el relleno */
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 150px; /* Ancho fijo */
+}
+
+/* Estilos para los botones al pasar el cursor */
+button:hover {
+  background-color: rgba(255, 255, 255, 0.3); /* Cambiar el color de fondo al pasar el cursor */
+}

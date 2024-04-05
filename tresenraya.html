@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Página con Cabecera y Detalle</title>
+		<link rel="stylesheet" href="styles.css">
+		<style>
+			.cell {
+				height: 60px;
+				width: 60px;
+				border: 1px solid;
+				display: inline-block;
+				line-height: 60px;
+				text-align: center;
+				vertical-align: top;
+				background-color: rgba(0, 0, 0, 0.5);
+			}
+		</style>
+	</head>
+
+	<header>
+	  <h1>Aprendizaje Animado</h1>
+	</header>
+	<main>
+		<h1>Tres en raya</h1>
+		<div id="board"></div>
+		<button onclick="window.location.href='index.html'">Inicio</button>
+
+		<script>
+			var board = ['','','','','','','','',''];
+			var player = 'X';
+
+			function drawBoard() {
+				document.getElementById('board').innerHTML = '';
+				for(i = 0; i < board.length; i++) {
+					document.getElementById('board').innerHTML += '<div class="cell" onclick="makeMove(' + i + ')">' + board[i] + '</div>';
+					if (i % 3 == 2) {
+						document.getElementById('board').innerHTML += '<br/>';
+					}
+				}
+			}
+
+			function makeMove(i) {
+				if(board[i] == '') {
+					board[i] = player;
+					player = player == 'X' ? 'O' : 'X';
+					drawBoard();
+				}
+			}
+
+			drawBoard();
+		</script>
+	</main>
+</html>

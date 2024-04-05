@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Página con Cabecera y Detalle</title>
+		<link rel="stylesheet" href="styles.css">
+		<style>
+			#game {
+				border: 1px solid #fff;
+				background-color: rgba(0, 0, 0, 0.5);
+			}
+			#score {
+				top: 20px;
+				left: 20px;
+			}
+		</style>
+	</head>
+
+	<header>
+	  <h1>Aprendizaje Animado</h1>
+	</header>
+	<main>
+		<h1>Snake</h1>
+		<canvas id="game" width="400" height="400"></canvas>
+		<p id="score">Puntaje: 0</p>
+		<button onclick="window.location.href='index.html'">Inicio</button>
+		<script>
+		var canvas = document.getElementById('game');
+		var context = canvas.getContext('2d');
+		var scoreElement = document.getElementById('score');
+
+		var gridSize = 20;
+		var tileSize = canvas.width / gridSize;
+
+		var direction = 'right';
+		var snake = [{ top: 200, left: 200 }];
+		var apple = null;
+		var score = 0;
+
+		function gameLoop() {
+		  updateSnake();
+		  checkDeath();
+		  updateApple();
+		  drawGame();
+		  setTimeout(gameLoop, 500);
+		}
+
+		function updateSnake() {
+		  var head = Object.assign({}, snake[0]); // copy head
+		  if (direction === 'right') head.left += tileSize;
+		  if (direction === 'down') head.top += tileSize;
+		  if (direction === 'left') head.left -= tileSize;
+		  if (direction === 'up') head.top -= tileSize;
+		  snake.unshift(head);
+
+		  if (apple && apple.top === head.top && apple.left === head.left) { // ate apple
+			apple = null; // remove apple
+			score++; // increase score
+			scoreElement.innerText = 'Puntaje: ' + score; // update score display
+		  } else {
+			snake.pop(); // remove tail
+		  }
+		}
+
+		function checkDeath() {
+		  var head = snake[0];
+		  if (head.top < 0 || head.left < 0 || head.top === canvas.height || head.left === canvas.width) {
+			resetGame();
+		  }
+		  for (var i = 1; i < snake.length; i++) {
+			if (head.top === snake[i].top && head.left === snake[i].left) {
+			  resetGame();
+			}
+		  }
+		}
+
+		function resetGame() {
+		  direction = 'right';
+		  snake = [{ top: 200, left: 200 }];
+		  apple = null;
+		  score = 0;
+		  scoreElement.innerText = 'Puntaje: ' + score; // reset score display
+		}
+
+		function updateApple() {
+		  if (!apple) {
+			apple = { top: Math.floor(Math.random() * gridSize) * tileSize, left: Math.floor(Math.random() * gridSize) * tileSize };
+		  }
+		}
+
+		function drawGame() {
+		  context.clearRect(0, 0, canvas.width, canvas.height); // clear canvas
+		  context.fillStyle = 'lime';
+		  snake.forEach(function(cell) { context.fillRect(cell.left, cell.top, tileSize, tileSize); }); // draw snake
+		  if (apple) {
+			context.fillStyle = 'red';
+			context.fillRect(apple.left, apple.top, tileSize, tileSize); // draw apple
+		  }
+		}
+
+		window.addEventListener('keydown', function(e) {
+		  if (e.key === 'ArrowUp' && direction !== 'down') direction = 'up';
+		  if (e.key === 'ArrowDown' && direction !== 'up') direction = 'down';
+		  if (e.key === 'ArrowLeft' && direction !== 'right') direction = 'left';
+		  if (e.key === 'ArrowRight' && direction !== 'left') direction = 'right';
+		});
+
+		gameLoop();
+		</script>
+	</main>
+</html>
